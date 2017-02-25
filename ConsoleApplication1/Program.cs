@@ -45,7 +45,7 @@ namespace ConsoleApplication1
                 {
                     if (!(args[3] != "anime" || args[3] != "manga"))
                     {
-                        Console.WriteLine("updateMalImageCss : wrong type, type is must anime or manga ");
+                        Console.WriteLine("updateMalImageCss : wrong type, type is must anime or manga :)");
                     }
 
                     Console.WriteLine("Load local data.");
