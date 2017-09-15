@@ -11,6 +11,11 @@ namespace MalStyleImageUpdater.Models
         public int id { get; set; }
         public string name { get; set; }
         public string url { get; set; }
+
+        public MangaAnimeItem()
+        {
+        }
+
         public MangaAnimeItem(int id, string name, string url)
         {
             this.id = id;
