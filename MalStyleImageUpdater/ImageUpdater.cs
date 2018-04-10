@@ -14,6 +14,7 @@ using System.Xml;
 namespace MalStyleImageUpdater
 {
     using System.Xml.Serialization;
+    using TObject.Shared;
     using MangaAnimeItems = SortedDictionary<int, MangaAnimeItem>;
 
     public class ImageUpdater
@@ -170,19 +171,6 @@ namespace MalStyleImageUpdater
             {
                 var responseString = client.GetStringAsync("http://myanimelist.net/malappinfo.php?u=" + Settings.Instance.getUsername() + "&status=all&type=anime");
 
-                /*XmlDocument xmlData = new XmlDocument();
-                xmlData.LoadXml(responseString.Result);
-
-                XmlNodeList xnList = xmlData.SelectNodes("/myanimelist/anime");
-
-                foreach (XmlNode xn in xnList)
-                {
-                    string title = xn["series_title"].InnerText;
-                    string image = xn["series_image"].InnerText;
-                    int id = Int32.Parse(xn["series_animedb_id"].InnerText);
-                    animeRemote.Add(id, new MangaAnimeItem(id, title, image));
-                }*/
-
                 XmlSerializer serializer = new XmlSerializer(typeof(XmlAnime));
                 TextReader reader = new StringReader(responseString.Result);
                 XmlAnime anime = (XmlAnime)serializer.Deserialize(reader);
@@ -239,19 +227,6 @@ namespace MalStyleImageUpdater
             using (var client = new HttpClient())
             {
                 var responseString = client.GetStringAsync("http://myanimelist.net/malappinfo.php?u=" + Settings.Instance.getUsername() + "&status=all&type=manga");
-
-                /*XmlDocument xmlData = new XmlDocument();
-                xmlData.LoadXml(responseString.Result);
-
-                XmlNodeList xnList = xmlData.SelectNodes("/myanimelist/manga");
-
-                foreach (XmlNode xn in xnList)
-                {
-                    string title = xn["series_title"].InnerText;
-                    string image = xn["series_image"].InnerText;
-                    int id = Int32.Parse(xn["series_mangadb_id"].InnerText);
-                    mangaRemote.Add(id, new MangaAnimeItem(id, title, image));
-                }*/
 
                 XmlSerializer serializer = new XmlSerializer(typeof(XmlManga));
                 TextReader reader = new StringReader(responseString.Result);
@@ -321,7 +296,6 @@ namespace MalStyleImageUpdater
             foreach (MangaAnimeItem item in animeLocal.Values)
             {
                 sb.Append("#more" + item.id.ToString() + " {background-image: url(" + item.url + ");} /* " + item.name + " */\r\n");
-                //css += "#more" + item.id.ToString() + " {background-image: url(" + item.url + ");} /* " + item.name + " */\r\n";
             }
 
             sw.Stop();
@@ -384,7 +358,5 @@ namespace MalStyleImageUpdater
             sw.Stop();
             Console.WriteLine("Write to manga file is done {0}ms.", sw.Elapsed.TotalMilliseconds);
         }
-
-
     }
 }

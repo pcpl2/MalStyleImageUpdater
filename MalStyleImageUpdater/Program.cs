@@ -18,6 +18,7 @@ namespace MalStyleImageUpdater
         static void Main(string[] args)
         {
             ImageUpdater imageUpdater = new ImageUpdater();
+            Console.ReadLine();
         }
     }
 }
